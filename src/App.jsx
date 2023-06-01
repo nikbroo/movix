@@ -43,7 +43,7 @@ function App() {
   return (
     <BrowserRouter>
     {/* {url?.total_pages} */}
-      {/* <Header /> */}
+      <Header />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/:mediaType/:id' element={<Details />} />
