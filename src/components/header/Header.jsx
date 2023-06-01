@@ -18,14 +18,28 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location])
+
   const controlNavbar = () => {
     console.log(window.scrollY)
-  }
-  
+    if (window.scrollY > 200) {
+      if (window.scrollY > lastScrollY) {
+        setShow("hide");
+      } else {
+        setShow("show");
+      }
+    } else {
+      setShow("top");
+    }
+    setLastScrollY(window.scrollY);
+  };
+
   useEffect(() => {
-    window.addEventListener("scroll",controlNavbar);
+    window.addEventListener("scroll", controlNavbar);
     return () => {
-      window.removeEventListener("scroll",controlNavbar)
+      window.removeEventListener("scroll", controlNavbar)
     }
   }, [lastScrollY])
 
@@ -46,11 +60,11 @@ const Header = () => {
 
   const openMobileMenu = () => {
     setMobileMenu(true)
-    setShowSearch(false)    
+    setShowSearch(false)
   };
 
   const navigationHandler = (type) => {
-    if(type === "movie"){
+    if (type === "movie") {
       navigate("/explore/movie");
     } else {
       navigate("/explore/tv");
@@ -83,7 +97,7 @@ const Header = () => {
       </ContentWrapper>
       {showSearch && <div className="searchBar">
         <ContentWrapper>
-        <div className='searchInput'>
+          <div className='searchInput'>
             <input
               type="text"
               placeholder='Search for a movies or tv'
